@@ -6,7 +6,8 @@ from GraphSearch import NodesCollection
 
 def tail_manhattan_heuristic(state: MazeState):
     # TODO (EX 7.2), implement heuristic, delete exception
-    raise NotImplemented
+    dist = (abs(state.tail - state.maze_problem.tail_goal).sum()) * state.maze_problem.forward_cost
+    return dist
 
 
 def center_manhattan_heuristic(state: MazeState):
@@ -48,4 +49,4 @@ class ShorterRobotHeuristic:
             return ...
         else:
             return ...  # what should we return in this case, so that the heuristic would be as informative as possible
-                        # but still admissible
+            # but still admissible
