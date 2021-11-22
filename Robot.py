@@ -47,14 +47,15 @@ class BreadthFirstSearchRobot(Robot):
             self.close.add(next_node)
             ############################################################################################################
             # TODO (EX. 4.1): complete code here, delete exception
+            n_node_expanded += 1
             for new_state, cost in maze.expand_state(next_node.state):
                 if new_state not in self.close and new_state not in self.queue:
-                    n_node_expanded += 1
+
                     child_node = Node(new_state, next_node, g_value=cost + next_node.g_value)
                     # A node only counts as expanded when it is POPed out of the queue
                     if maze.is_goal(child_node.state):
                         return GraphSearchSolution(final_node=child_node, solve_time=curr_time() - start_time,
-                                                   n_node_expanded=n_node_expanded - len(self.queue), no_solution_reason=None)
+                                                   n_node_expanded=n_node_expanded, no_solution_reason=None)
                     self.queue.add(child_node)
 
             ############################################################################################################
@@ -113,7 +114,32 @@ class BestFirstSearchRobot(Robot):
                                                n_node_expanded=n_node_expanded, init_heuristic_time=init_heuristic_time)
             ############################################################################################################
             # TODO (EX. 5.1): complete code here, delete exception
-            raise NotImplemented
+            n_node_expanded += 1
+            for new_state, cost in maze_problem.expand_state(next_node.state):
+                new_g = cost + next_node.g_value
+                if new_state not in self.close and new_state not in self.open:
+                    child_node = Node(new_state, next_node, g_value=new_g)
+                    self.open.add(child_node, self._calc_node_priority(child_node))
+                elif new_state in self.open:
+                    n_curr = self.open.get_node(new_state)
+                    if n_curr.g_value > new_g:
+                        self.open.remove_node(self.open.get_node(new_state))
+                        n_curr.g_value = new_g
+                        n_curr.parent = next_node
+                        self.open.add(n_curr, self._calc_node_priority(n_curr))
+                else:
+                    node = self.close.get_node(new_state)
+                    if node.g_value > new_g:
+                        self.close.remove_node(node)
+                        node.g_value = new_g
+                        self.open.add(node, self._calc_node_priority(node))
+
+                    # A node only counts as expanded when it is POPed out of the queue
+                    # if maze_problem.is_goal(child_node.state):
+                    #     return GraphSearchSolution(final_node=child_node, solve_time=curr_time() - start_time,
+                    #                                n_node_expanded=n_node_expanded - len(self.open),
+                    #                                no_solution_reason=None)
+
 
             ############################################################################################################
 
@@ -133,7 +159,7 @@ class UniformCostSearchRobot(BestFirstSearchRobot):
 
     def _calc_node_priority(self, node):
         # TODO (Ex. 5.2): complete code here (just return the g value), delete exception
-        raise NotImplemented
+        return node.g_value
 
 
 class WAStartRobot(BestFirstSearchRobot):
@@ -153,4 +179,6 @@ class WAStartRobot(BestFirstSearchRobot):
 
     def _calc_node_priority(self, node):
         # TODO (Ex. 7.1): complete code here, delete exception
-        raise NotImplemented
+        G = node.g_value
+        H = self.heuristic(node.state)
+        return (1-self.w)*G + self.w*H
