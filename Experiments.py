@@ -12,7 +12,11 @@ def w_experiment(maze_index):
     for w in w_values:
         ################################################################################################################
         # TODO (EX. 10.1): complete code here, delete exception
-        raise NotImplemented
+        # Need to get solution of robot for maze maze_index, with the specified w, using the center hueristic
+        robot_inst = WAStartRobot(heuristic=center_manhattan_heuristic, w=w)
+        solution = robot_inst.solve(problem)
+        solve_times.append(solution.solve_time)
+        solution_costs.append(solution.cost)
 
         ################################################################################################################
 
@@ -20,14 +24,18 @@ def w_experiment(maze_index):
     plt.xlabel("w")
     plt.ylabel("time")
     plt.title(f"wA* with center_manhattan_heuristic solving time on maze_{maze_index}")
-    plt.savefig(f"plots/wA* with center_manhattan_heuristic solving time on maze_{maze_index}.png")
+    # TODO: revert this line when submitting
+    # plt.savefig(f"plots/wA* with center_manhattan_heuristic solving time on maze_{maze_index}.png")
+    plt.savefig(f"plots-wAstar with center_manhattan_heuristic solving time on maze_{maze_index}.png")
     plt.clf()
 
     plt.plot(w_values, solution_costs)
     plt.xlabel("w")
     plt.ylabel("cost")
     plt.title(f"wA* with center_manhattan_heuristic solution cost on maze_{maze_index}")
-    plt.savefig(f"plots/wA* with center_manhattan_heuristic solution cost on maze_{maze_index}.png")
+    # TODO: revert this line when submitting
+    # plt.savefig(f"plots/wA* with center_manhattan_heuristic solution cost on maze_{maze_index}.png")
+    plt.savefig(f"plots-wAstar with center_manhattan_heuristic solution cost on maze_{maze_index}.png")
     plt.clf()
 
 def shorter_robot_heuristic_experiment(maze_index):
