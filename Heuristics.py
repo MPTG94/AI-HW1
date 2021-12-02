@@ -45,7 +45,7 @@ class ShorterRobotHeuristic:
         n_head = head - (kdiv * robot_dir)
         n_tail = tail + (kdiv * robot_dir)
 
-        return n_head, n_tail
+        return n_head.astype(int), n_tail.astype(int)
 
     def __call__(self, state: MazeState):
         # TODO (EX. 13.3): replace each three dots, delete exception
