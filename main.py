@@ -10,7 +10,7 @@ if __name__ == "__main__":
     # test_robot(UniformCostSearchRobot, [0, 1, 2, 3, 4, 5])
     # test_robot(WAStartRobot, [0, 1, 2, 3, 4, 5], heuristic=tail_manhattan_heuristic)
     # test_robot(WAStartRobot, [99], heuristic=tail_manhattan_heuristic)
-    # a = solve_and_display(UniformCostSearchRobot, 3)
+    a = solve_and_display(WAStartRobot, 5, blit=True, heuristic=center_manhattan_heuristic)
     # b = solve_and_display(BreadthFirstSearchRobot, 3)
 
     # for i in range(3):
@@ -20,5 +20,11 @@ if __name__ == "__main__":
     # for w in w_values:
     #     a = solve_and_display(WAStartRobot, 2, heuristic=center_manhattan_heuristic, w=w, blit=False)
 
-    for k in [2, 4, 6, 8]:
-        test_robot(WAStartRobot, [3, 4], heuristic=ShorterRobotHeuristic, k=k)
+    # for k in [2, 4, 6, 8]:
+    #     test_robot(WAStartRobot, [3, 4], heuristic=ShorterRobotHeuristic, k=k)
+    # test_robot(WAStartRobot, [3, 4], heuristic=center_manhattan_heuristic)
+    # test_robot(WAStartRobot, [0, 1, 2, 3, 4, 5], heuristic=center_manhattan_heuristic)
+    # for k in [2, 4, 6, 8]:
+    #     test_robot(WAStartRobot, [0, 1, 2, 3, 4, 5], heuristic=ShorterRobotHeuristic, k=k)
+    # for i in range(2,6):
+    #     shorter_robot_heuristic_experiment(i)

@@ -38,6 +38,7 @@ def w_experiment(maze_index):
     plt.savefig(f"plots-wAstar with center_manhattan_heuristic solution cost on maze_{maze_index}.png")
     plt.clf()
 
+
 def shorter_robot_heuristic_experiment(maze_index):
     problem = create_problem(f"maze_{maze_index}")
     length = problem.length
@@ -47,7 +48,10 @@ def shorter_robot_heuristic_experiment(maze_index):
     for k in ks:
         ################################################################################################################
         # TODO (EX. 16.3): complete code here, delete exception
-        raise NotImplemented
+        robot_inst = WAStartRobot(heuristic=ShorterRobotHeuristic, k=k)
+        solution = robot_inst.solve(problem)
+        solve_times.append(solution.solve_time)
+        heuristic_init_times.append(solution.init_heuristic_time)
 
         ################################################################################################################
 
