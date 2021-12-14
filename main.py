@@ -6,9 +6,13 @@ from Utilities import *
 from Experiments import *
 
 if __name__ == "__main__":
+    # Part 4
     # test_robot(BreadthFirstSearchRobot, [0, 1, 2, 3, 4, 5])
+    # Part 5
     # test_robot(UniformCostSearchRobot, [0, 1, 2, 3, 4, 5])
+    # Part 7
     # test_robot(WAStartRobot, [0, 1, 2, 3, 4, 5], heuristic=tail_manhattan_heuristic)
+    # Part 8
     test_robot(WAStartRobot, [99], heuristic=tail_manhattan_heuristic)
     a = solve_and_display(WAStartRobot, 99, blit=True, heuristic=tail_manhattan_heuristic)
     # a = solve_and_display(WAStartRobot, 5, blit=True, heuristic=center_manhattan_heuristic)
